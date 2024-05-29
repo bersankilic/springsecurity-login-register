@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Giriş Yap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            color: #004d40;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #00796b;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #004d40;
+            border-radius: 3px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            background-color: #00796b;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #004d40;
+        }
+
+        .error-message, .logout-message {
+            background-color: #004d40;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        .register-link a {
+            color: #00796b;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <div th:if="${param.error}">
+            <div class="error-message">
+                <p>Geçersiz Kullanıcı Adı veya Şifre</p>
+            </div>
+        </div>
+
+        <div th:if="${param.logout}">
+            <div class="logout-message">
+                <p>Çıkış Yaptınız !</p>
+            </div>
+        </div>
+
+        <h2>Giriş</h2>
+        <form method="post" role="form" th:action="@{/login}" th:object="${user}">
+            <div class="form-group">
+                <label for="username">Kullanıcı Adı</label>
+                <input th:field="*{username}" type="text" id="username" name="username" placeholder="Kullanıcı Adınızı Giriniz" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Şifre</label>
+                <input th:field="*{password}" type="password" id="password" name="password" placeholder="Şifrenizi Giriniz" required>
+            </div>
+            <button type="submit">Giriş</button>
+        </form>
+        <div class="register-link">
+             <a th:href="@{/register}">Kayıt Ol</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
